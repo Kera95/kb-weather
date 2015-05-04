@@ -2,21 +2,27 @@
 
 namespace Admin;
 
-class KBWeatherAdminInit {
+class KBW_Admin_Init {
 
-    private $kb_metabox;
+    private $kbw_router;
 
     public function __construct() {
+
+        $this->kbw_router = new KBW_Router();
 
         $this->kb_admin_action_hooks();
 
     }
 
     public function kb_admin_action_hooks() {
+
         add_action( 'init', array( $this, 'kb_register_post_types' ) );
+        add_action( 'admin_menu', array( $this, 'kb_init_submenu_pages' ) );
+
     }
 
     public function kb_register_post_types() {
+
         $args = array(
             'labels'             => $labels = array(
                 'name'               => __( 'Weather',                      KBWEATHER_TEXTDOMAIN ),
@@ -43,11 +49,24 @@ class KBWeatherAdminInit {
             'capability_type'    => 'post',
             'has_archive'        => true,
             'hierarchical'       => false,
-            'menu_position'      => null,
+            'menu_position'      => 85,
             'supports'           => array( 'title' )
         );
 
         register_post_type( 'kb-weather-reporter', $args );
+
+    }
+
+    public function kb_init_submenu_pages() {
+
+        add_submenu_page( 'edit.php?post_type=kb-weather-reporter', 'KB Weather Settings', 'Weather Settings', 'manage_options', 'kb-weather-report', array( $this, 'kb_init_pages_templates' ) );
+
+    }
+
+    public function kb_init_pages_templates() {
+
+        require_once( 'templates/kbw-settings-page.php' );
+
     }
 
 }

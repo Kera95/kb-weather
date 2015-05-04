@@ -22,6 +22,6 @@ if ( !defined( 'KBWEATHER_TEXTDOMAIN' ) ) {
 
 require( 'vendor/autoload.php' );
 
-$test = new \Admin\KBWeatherAdminInit();
+$test = new \Admin\KBW_Admin_Init();
 
 ?>
