@@ -1,0 +1,7 @@
+/nbproject/*
+/.htaccess
+/.idea/*
+
+# ignore OS generated files
+ehthumbs.db
+Thumbs.db
